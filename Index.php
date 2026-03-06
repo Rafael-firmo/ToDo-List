@@ -3,7 +3,7 @@ require_once('database/config.php');
 
 $tasks = [];
 
-$sql = $conn->query('SELECT * FROM tarefas ');
+$sql = $conn->query('SELECT * FROM tarefas ORDER BY id ASC');
 if ($sql->num_rows > 0) {
     $tasks = $sql->fetch_all(MYSQLI_ASSOC);
 };
@@ -33,7 +33,8 @@ if ($sql->num_rows > 0) {
                     <input 
                         type="checkbox" 
                         name="progress" 
-                        class="progress"
+                        data-task-id="<?= $task['id'] ?>"
+                        class="progress <?= $task['completed'] == true ? 'done' : '' ?>"
                         <?= $task['completed'] ? 'checked': '' ?>
                     >
                     <p class="task-description"> 
@@ -50,8 +51,14 @@ if ($sql->num_rows > 0) {
                         </a>
                     </div>
                     
-                    <form action="actions/delete.php" class="todo-form edit-task hidden" method="get">
-                        <input type="text" name="description" placeholder="edit your task here">
+                    <form action="actions/update.php" class="todo-form edit-task hidden" method="post">
+                        <input type="text" class="hidden" name="id" value="<?= $task['id'] ?>">
+                        <input 
+                            type="text" 
+                            name="description" 
+                            placeholder="edit your task here" 
+                            value="<?= $task['description'] ?>"
+                        >
                         <button type="submit" class="form-button confirm-button"> <i class="fa-solid fa-check"></i> </button>
                     </form>
                 </div>
