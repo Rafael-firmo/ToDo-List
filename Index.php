@@ -22,9 +22,9 @@ if ($sql->num_rows > 0) {
     <div id="to-do">
         <h1> Things to do</h1>
 
-        <form action="" class="todo-form">
-            <input type="text" name="Description" placeholder="Write your task here" required> 
-            <button type="button" class="form-button"> <i class="fa-solid fa-plus"></i> </button>
+        <form action="actions/create.php" class="todo-form" method="post">
+            <input type="text" name="description" placeholder="Write your task here" required> 
+            <button type="submit" class="form-button"> <i class="fa-solid fa-plus"></i> </button>
         </form>
 
         <div class="task-list">
@@ -45,14 +45,14 @@ if ($sql->num_rows > 0) {
                             <i class="fa-regular fa-pen-to-square"> </i>
                         </a>
 
-                        <a class="action-button delete-button"> 
+                        <a href="actions/delete.php?id=<?= $task['id']  ?>" class="action-button delete-button"> 
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </div>
                     
-                    <form action="" class="todo-form edit-task hidden">
-                        <input type="text" name="Description" placeholder="edit your task here">
-                        <button type="button" class="form-button confirm-button"> <i class="fa-solid fa-check"></i> </button>
+                    <form action="actions/delete.php" class="todo-form edit-task hidden" method="get">
+                        <input type="text" name="description" placeholder="edit your task here">
+                        <button type="submit" class="form-button confirm-button"> <i class="fa-solid fa-check"></i> </button>
                     </form>
                 </div>
             <?php endforeach ?>
