@@ -117,6 +117,7 @@ body {
 .task .progress.done + .task-description{
     text-decoration: line-through;
     color: #e5f9ffa7;
+
 }
 .hidden {
     display: none !important;
